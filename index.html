@@ -3,24 +3,11 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Exemple de script...</title>
+  <title>Librairie</title>
 
   <!-- On importe le code CSS de Bootstrap depuis un serveur distant (CDN) -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
-
-  <style>
-    .card {
-      width: 18rem;
-      cursor: pointer;
-      margin-bottom: 10px;
-      user-select: none;
-      border: 1px;
-    }
-
-    .card:hover {
-      background-color: lightblue;
-    }
-  </style>
+  <link rel="stylesheet" href="/static/css/styles.css">
 
 </head>
 
@@ -28,21 +15,27 @@
 
   <div class="container py-4">
 
-    <h1 class="text-center">Bibliothèque</h1>
+    <h1 class="text-center">Librairie</h1>
 
-    <!-- colonne en vente -->
     <div class="row">
-      <div class="col bg-light border rounded m-4 p-4" id="col_vente">
-        
-      </div>
-    <!-- colonne vendu  -->
       <div class="col bg-light border rounded m-4 p-4">
-
+        <h2>Livres en vente</h2>
+        <div id="livresEnVente" class="d-flex flex-wrap"></div>
+      </div>
+      <div class="col bg-light border rounded m-4 p-4">
+        <h2>Livres vendus</h2>
+        <div id="livresVendus" class="d-flex flex-wrap"></div>
       </div>
     </div>
+
+    <form id="ajouterLivre">
+        <input type="text" id="nom" placeholder="Nom du livre" required>
+        <input type="text" id="auteur" placeholder="Auteur du livre" required>
+        <input type="number" id="prix" placeholder="Prix du livre" required>
+        <button type="submit">Ajouter le livre</button>
+    </form>
+
   </div>
-
-
 
   <!-- On importe les scripts après le contenu de la page ! -->
 
