@@ -13,11 +13,11 @@ function afficherLivres() {
     $('#livresVendus').html('');
     livresEnVente.forEach(livre => {
         $('#livresEnVente').append(`
-            <div class="card m-2">
-                <div class="card-body">
-                    <h5 class="card-title">${livre.nom}</h5>
-                    <p class="card-text">${livre.auteur}</p>
-                    <p class="card-text"> ${livre.prix}€ <p>
+            <div class="book m-2">
+                <div class="book-body">
+                    <h5 class="book-title">${livre.nom}</h5>
+                    <p class="book-text">${livre.auteur}</p>
+                    <p class="book-text"> ${livre.prix}€ <p>
                     <button onclick="vendreLivre(${livre.id})" class="btn btn-primary">Vendre</button>
                 </div>
             </div>
@@ -25,11 +25,11 @@ function afficherLivres() {
     });
     livresVendus.forEach(livre => {
         $('#livresVendus').append(`
-            <div class="card m-2">
-                <div class="card-body">
-                    <h5 class="card-title">${livre.nom}</h5>
-                    <p class="card-text">${livre.auteur}</p>
-                    <p class="card-text"> ${livre.prix}€ <p>
+            <div class="book m-2">
+                <div class="book-body">
+                    <h5 class="book-title">${livre.nom}</h5>
+                    <p class="book-text">${livre.auteur}</p>
+                    <p class="book-text"> ${livre.prix}€ <p>
                 </div>
             </div>
         `);
@@ -85,7 +85,7 @@ const addBehaviorToList = (list) => {
 };
 
 const main = () => {
-    $(".card").attr('draggable', true).each(function () {
+    $(".book").attr('draggable', true).each(function () {
         addBehaviorToBook(this)
     })
 
