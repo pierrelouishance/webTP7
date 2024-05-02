@@ -13,33 +13,33 @@ function afficherLivres() {
     $('#livresVendus').html('');
     livresEnVente.forEach(livre => {
         $('#livresEnVente').append(`
-            <div class="book m-2">
-                <div class="book-body">
-                    <h5 class="book-title">${livre.nom}</h5>
-                    <p class="book-text">${livre.auteur}</p>
-                    <p class="book-text"> ${livre.prix}€ <p>
-                    <button onclick="vendreLivre(${livre.id})" class="btn btn-primary">Vendre</button>
+            <div class="card m-2" draggable="true" id="${livre.id}">
+                <div class="card-body">
+                    <h5 class="card-title">${livre.nom}</h5>
+                    <p class="card-text">${livre.auteur}</p>
+                    <p class="card-text">${livre.prix}€</p>
+                    <button onclick="supprimerLivre(${livre.id}, 'vente')" class="btn btn-primary">Supprimer</button>
                 </div>
             </div>
         `);
     });
     livresVendus.forEach(livre => {
         $('#livresVendus').append(`
-            <div class="book m-2">
-                <div class="book-body">
-                    <h5 class="book-title">${livre.nom}</h5>
-                    <p class="book-text">${livre.auteur}</p>
-                    <p class="book-text"> ${livre.prix}€ <p>
+            <div class="card m-2" draggable="true" id="${livre.id}">
+                <div class="card-body">
+                    <h5 class="card-title">${livre.nom}</h5>
+                    <p class="card-text">${livre.auteur}</p>
+                    <p class="card-text">${livre.prix}€</p>
                 </div>
             </div>
         `);
     });
 }
 
-function vendreLivre(id) {
-    let livre = livresEnVente.find(l => l.id === id);
-    livresEnVente = livresEnVente.filter(l => l.id !== id);
-    livresVendus.push(livre);
+function supprimerLivre(id, type) {
+    if (type === 'vente') {
+        livresEnVente = livresEnVente.filter(l => l.id !== id);
+    }
     afficherLivres();
 }
 
@@ -68,7 +68,7 @@ const addBehaviorToBook = (book) => {
     })
 }
 
-const addBehaviorToList = (list) => {
+const addBehaviorToList = (list, type) => {
     $(list).on('dragover', (event) => {
         event.preventDefault()
     })
@@ -80,18 +80,25 @@ const addBehaviorToList = (list) => {
 
         book.fadeOut(300, function () {
             book.appendTo($(event.target)).fadeIn(300)
+            const livre = livresEnVente.find(l => l.id === parseInt(dragged_book_id)) || livresVendus.find(l => l.id === parseInt(dragged_book_id));
+            if (type === 'vente') {
+                livresEnVente.push(livre);
+                livresVendus = livresVendus.filter(l => l.id !== livre.id);
+            } else if (type === 'vendu') {
+                livresVendus.push(livre);
+                livresEnVente = livresEnVente.filter(l => l.id !== livre.id);
+            }
         })
     })
 };
 
 const main = () => {
-    $(".book").attr('draggable', true).each(function () {
+    $(".card").attr('draggable', true).each(function () {
         addBehaviorToBook(this)
     })
 
-    $(".col.bg-light.border").each(function () {
-        addBehaviorToList(this)
-    })
+    addBehaviorToList("#livresEnVente", 'vente');
+    addBehaviorToList("#livresVendus", 'vendu');
 }
 
 $(document).ready(main);

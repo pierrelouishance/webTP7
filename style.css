@@ -1,10 +1,11 @@
-.book {
+.card {
     width: 18rem;
     cursor: pointer;
     margin-bottom: 10px;
     user-select: none;
+    border: 1px;
   }
 
-  .book:hover {
+  .card:hover {
     background-color: lightblue;
   }
