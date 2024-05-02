@@ -51,6 +51,7 @@ $('#ajouterLivre').submit(function(e) {
     let id = Math.max(...livresEnVente.map(l => l.id), ...livresVendus.map(l => l.id)) + 1;
     livresEnVente.push({id, nom, auteur, prix});
     afficherLivres();
+    addBehaviorToBook($("#" + newBook.id));
 });
 
 afficherLivres();
